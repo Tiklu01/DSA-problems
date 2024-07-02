@@ -28,6 +28,30 @@ void insertAtEnd(Node ** head_ref, int new_data){
         
 }
 
+void insertAfter(Node ** head_ref, int new_data, int key){
+    Node * new_node = new Node();
+    new_node -> data = new_data;
+    Node * ptr = (*head_ref);
+    while( ptr->data != key  ){
+        ptr = ptr->next;
+    }
+    new_node->next = ptr->next;
+    ptr->next = new_node;
+}
+void insertBefore(Node ** head_ref, int new_data, int key){
+    Node * new_node = new Node();
+    Node * temp = new Node();
+    new_node -> data = new_data;
+    Node * ptr = (*head_ref);
+    while( ptr->data != key  ){
+        temp=ptr;
+        ptr = ptr->next;
+    }
+    temp->next = new_node;
+    new_node -> next = ptr;
+    
+}
+
 void printList(Node* node){
     while(node!=NULL){
         cout<<node->data<<" ";
@@ -42,6 +66,8 @@ int main() {
     insertAtbeg(&head,1);
     insertAtbeg(&head,2);
     insertAtEnd(&head,3);
+    insertAfter(&head,5,2);
+    insertBefore(&head,6,5);
     printList(head);
     return 0;
 }
